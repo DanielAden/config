@@ -12,7 +12,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+PATH="$HOME/.cargo/bin:$PATH"
+export PATH
 . "$HOME/.cargo/env"
+
+# Add lunarvim etc. to path
+PATH="$HOME/.local/bin:$PATH"
 
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
