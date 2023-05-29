@@ -273,48 +273,47 @@ lvim.plugins = {
 --
 --
 
--- local dap = require('dap');
--- dap.adapters.typescript = {
---   {
---     type = 'typescript',
---     request = 'launch',
---     name = 'Launch App',
---     program = '${workspaceFolder}/src/App.ts'
---   }
--- }
--- dap.configurations.typescript = {
---   {
---     type = 'typescript',
---     request = 'launch',
---     name = 'Launch App',
---     program = '${workspaceFolder}/src/App.ts'
---   }
--- }
+-- require("dap-vscode-js").setup({
+--   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+--   debugger_path = "/Users/dat3631/source/vscode-js-debug",                                     -- Path to vscode-js-debug installation.
+--   -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+--   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+--   -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+--   -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
+--   -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
+-- })
+--
 
 
-require("dap-vscode-js").setup({
-  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-  debugger_path = "/Users/dat3631/source/vscode-js-debug",                                     -- Path to vscode-js-debug installation.
-  -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
-  -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
-  -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
-  -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
-})
+local masonPackages = vim.fn.stdpath "data" .. "/mason/packages/";
+local dap = require('dap')
+dap.adapters.node2 = {
+  type = 'executable',
+  command = 'node',
+  args = { masonPackages .. 'node-debug2-adapter/out/src/nodeDebug.js' },
+}
+
 
 for _, language in ipairs({ "typescript", "javascript" }) do
   require("dap").configurations[language] = {
     {
-      type = "pwa-node",
+      name = "Launch App.ts",
+      type = "node2",
       request = "launch",
-      name = "Launch file",
-      program = "./src/App.ts",
+      cwd = "${workspaceFolder}",
+      args = { "-r", "ts-node/register/transpile-only", "./src/App.ts" }
+    },
+    {
+      name = "Launch File",
+      type = "node2",
+      request = "launch",
+      program = "${file}",
       cwd = "${workspaceFolder}",
     },
     {
-      type = "pwa-node",
-      request = "attach",
       name = "Attach",
+      type = "node2",
+      request = "attach",
       processId = require 'dap.utils'.pick_process,
       cwd = "${workspaceFolder}",
     }
@@ -322,6 +321,5 @@ for _, language in ipairs({ "typescript", "javascript" }) do
 end
 
 
-local cfg = {};  -- add your config here
+local cfg = {}; -- add your config here
 require "lsp_signature".setup(cfg)
-
