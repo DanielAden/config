@@ -11,6 +11,7 @@ vim.opt.listchars:append("trail:·")
 vim.opt.listchars:append("lead:·")
 
 
+
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = {
@@ -55,6 +56,7 @@ lvim.builtin.which_key.mappings["x"] = {
   a = { ":qa<CR>", "all" },
 }
 
+
 lvim.builtin.which_key.mappings["t"] = {
   name = "Diagnostics",
   t = { "<cmd>TroubleToggle<cr>", "trouble" },
@@ -65,12 +67,75 @@ lvim.builtin.which_key.mappings["t"] = {
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
 }
 
+-- vim-test
+vim.api.nvim_create_user_command(
+  'ClearTestBuffers',
+  function()
+    local buffers = vim.api.nvim_list_bufs();
+    for index, value in ipairs(buffers) do
+      local name = vim.api.nvim_buf_get_name(value);
+      local isTestBuffer = string.find(name, "term://") and string.find(name, "react%-scripts") or
+          string.find(name, "jest");
+      if (isTestBuffer) then
+        vim.cmd(string.format('bw! %s', value));
+      end
+    end
+    ;
+  end,
+  { nargs = 0 }
+)
+
+vim.g["test#strategy"] = "neovim";
+vim.g["test#neovim#term_position"] = "vert botright 120";
+vim.g["test#preserve_screen"] = 0;
+vim.g["test#javascript#jest#options"] = "--watchAll=false";
+vim.g["test#javascript#reactscripts#options"] = "--watchAll=false --env=jsdom";
+vim.g["test#neovim#start_normal"] = 1;
+-- vim.g["test#enabled_runners"] = ["javascript#jest"];
+lvim.builtin.which_key.mappings["u"] = {
+  name = "Unit Tests",
+  c = { function()
+    vim.cmd("ClearTestBuffers"); -- Wipes any previous test buffers
+  end, "Clear Test Buffers" },
+  t = { function()
+    vim.cmd("ClearTestBuffers");                         -- Wipes any previous test buffers
+    vim.cmd("TestNearest");
+    vim.cmd.exe { args = { '"normal \\<C-w>\\<C-p>"' } } -- puts cursor in previous position
+  end, "Test Nearest" },
+  T = { function()
+    vim.cmd("ClearTestBuffers");
+    vim.cmd("TestFile");
+    vim.cmd.exe { args = { '"normal \\<C-w>\\<C-p>"' } }
+  end, "Test File" },
+  a = { function()
+    vim.cmd("ClearTestBuffers");
+    vim.cmd("TestSuite");
+    vim.cmd.exe { args = { '"normal \\<C-w>\\<C-p>"' } }
+  end, "Test Suite" },
+  l = { function()
+    vim.cmd("ClearTestBuffers");
+    vim.cmd("TestLast");
+    vim.cmd.exe { args = { '"normal \\<C-w>\\<C-p>"' } }
+  end, "Run Last Test" },
+  g = { "<cmd>TestVisit<cr>", "Navigates to last visited test file" },
+}
+
+
+-- function! VagrantTransform(cmd) abort
+--   let vagrant_project = get(matchlist(s:cat('Vagrantfile'), '\vconfig\.vm.synced_folder ["''].+[''"], ["''](.+)[''"]'), 1)
+--   return 'vagrant ssh --command '.shellescape('cd '.vagrant_project.'; '.a:cmd)
+-- endfunction
+
+-- vim.g["test#custom_transformations"] = {'vagrant': function('VagrantTransform')}
+-- let g:test#transformation = 'vagrant'
+
+
 
 -- Automatically install missing parsers when entering buffer
 lvim.builtin.treesitter.auto_install = true
 
 
--- lvim.builtin.treesitter.ignore_install = { "haskell" }
+-- vim.builtin.treesitter.ignore_install = { "haskell" }
 
 -- -- always installed on startup, useful for parsers without a strict filetype
 -- lvim.builtin.treesitter.ensure_installed = { "comment", "markdown_inline", "regex" }
@@ -121,19 +186,27 @@ lvim.builtin.telescope.defaults = {
   }
 }
 
+vim.lsp.handlers["textDocument/references"] = require("telescope/builtin").lsp_references;
+
 
 -- linters, formatters and code actions <https://www.lunarvim.org/docs/languages#lintingformatting>
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "stylua" },
   -- {
-  --   command = "prettierd",
+  --   command = "prettier",
   --   -- extra_args = { "--print-width", "100" },
   --   filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
   -- },
+  -- {
+  --   command = "eslint_d"
+  -- },
   {
-    command = "eslint_d"
-  }
+    command = "prettierd"
+  },
+  -- {
+  --   { exe = "jq", args = { "--indent", "2" }, filetypes = { "json" } },
+  -- }
 }
 
 local linters = require "lvim.lsp.null-ls.linters"
@@ -153,11 +226,14 @@ code_actions.setup {
   {
     exe = "eslint_d",
     filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-  },
+  }
 }
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 lvim.plugins = {
+  {
+    "vim-test/vim-test",
+  },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
@@ -178,7 +254,12 @@ lvim.plugins = {
       require("leap").add_default_mappings()
     end,
   },
-
+  {
+    "mxsdev/nvim-dap-vscode-js",
+  },
+  {
+    "ray-x/lsp_signature.nvim"
+  }
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
@@ -189,3 +270,58 @@ lvim.plugins = {
 --     require("nvim-treesitter.highlight").attach(0, "bash")
 --   end,
 -- })
+--
+--
+
+-- local dap = require('dap');
+-- dap.adapters.typescript = {
+--   {
+--     type = 'typescript',
+--     request = 'launch',
+--     name = 'Launch App',
+--     program = '${workspaceFolder}/src/App.ts'
+--   }
+-- }
+-- dap.configurations.typescript = {
+--   {
+--     type = 'typescript',
+--     request = 'launch',
+--     name = 'Launch App',
+--     program = '${workspaceFolder}/src/App.ts'
+--   }
+-- }
+
+
+require("dap-vscode-js").setup({
+  -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+  debugger_path = "/Users/dat3631/source/vscode-js-debug",                                     -- Path to vscode-js-debug installation.
+  -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+  adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
+  -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+  -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
+  -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+  require("dap").configurations[language] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "./src/App.ts",
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = require 'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+    }
+  }
+end
+
+
+local cfg = {};  -- add your config here
+require "lsp_signature".setup(cfg)
+
