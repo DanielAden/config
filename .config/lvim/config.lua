@@ -11,7 +11,6 @@ vim.opt.listchars:append("trail:·")
 vim.opt.listchars:append("lead:·")
 
 
-
 -- general
 lvim.log.level = "info"
 lvim.format_on_save = {
@@ -65,6 +64,11 @@ lvim.builtin.which_key.mappings["t"] = {
   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+}
+
+lvim.builtin.which_key.mappings["j"] = {
+  name = "Terminal",
+  j = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
 }
 
 -- vim-test
@@ -258,9 +262,10 @@ lvim.plugins = {
     "mxsdev/nvim-dap-vscode-js",
   },
   {
-    "ray-x/lsp_signature.nvim"
-  }
+    "ray-x/lsp_signature.nvim",
+  },
 }
+
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
@@ -297,6 +302,13 @@ dap.adapters.node2 = {
 for _, language in ipairs({ "typescript", "javascript" }) do
   require("dap").configurations[language] = {
     {
+      name = "Attach",
+      type = "node2",
+      request = "attach",
+      processId = require 'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+    },
+    {
       name = "Launch App.ts",
       type = "node2",
       request = "launch",
@@ -310,13 +322,6 @@ for _, language in ipairs({ "typescript", "javascript" }) do
       program = "${file}",
       cwd = "${workspaceFolder}",
     },
-    {
-      name = "Attach",
-      type = "node2",
-      request = "attach",
-      processId = require 'dap.utils'.pick_process,
-      cwd = "${workspaceFolder}",
-    }
   }
 end
 
