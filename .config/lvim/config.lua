@@ -86,7 +86,7 @@ lvim.builtin.which_key.mappings["s"] = vim.tbl_extend(
   "keep",
   lvim.builtin.which_key.mappings["s"],
   {
-    T = { 
+    T = {
       require("telescope.builtin").grep_string,
       "search word under cursor"
     }
