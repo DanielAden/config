@@ -29,6 +29,17 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
+-- Half page navigation automatically centers to middle of the page
+lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
+lvim.keys.normal_mode["<C-u>"] = "<C-u>zz"
+
+-- Highlighted searches centers to middle of the page
+lvim.keys.normal_mode["n"] = "nzzzv"
+lvim.keys.normal_mode["N"] = "Nzzzv"
+
+-- paste over selected text while preserving yanked text
+vim.keymap.set("x", "<leader>p", "\"_dP")
+
 -- -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -70,6 +81,17 @@ lvim.builtin.which_key.mappings["j"] = {
   name = "Terminal",
   j = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
 }
+
+lvim.builtin.which_key.mappings["s"] = vim.tbl_extend(
+  "keep",
+  lvim.builtin.which_key.mappings["s"],
+  {
+    T = { 
+      require("telescope.builtin").grep_string,
+      "search word under cursor"
+    }
+  }
+)
 
 -- vim-test
 vim.api.nvim_create_user_command(
