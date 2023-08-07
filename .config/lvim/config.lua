@@ -264,6 +264,7 @@ lvim.plugins = {
   {
     "ray-x/lsp_signature.nvim",
   },
+  { 'nvim-treesitter/playground' },
 }
 
 
