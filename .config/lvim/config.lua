@@ -8,6 +8,9 @@
 pcall(require, "user.work-config")
 pcall(require, "user.personal-config")
 
+require('scope').setup({})
+require('telescope').load_extension("scope");
+
 lvim.colorscheme = "carbonfox"
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
@@ -53,6 +56,7 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 -- -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
@@ -101,24 +105,47 @@ lvim.builtin.which_key.mappings["x"] = {
 }
 
 lvim.builtin.which_key.mappings["t"] = {
-  name = "Diagnostics",
+  name = [[Diagnostics/Tabs]],
   t = { "<cmd>TroubleToggle<cr>", "trouble" },
   w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
   d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
   q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
   l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
   r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+  n = { "<cmd>tabnext<cr>", "tab next" },
+  p = { "<cmd>tabprev<cr>", "tab prev" },
+  a = { "<cmd>tabnew<cr>", "add tab" },
 }
+
+lvim.builtin.which_key.mappings["b"]["f"] = { "<cmd>Telescope scope buffers<cr>", "Find Scoped Buffer" }
 
 lvim.builtin.which_key.mappings["j"] = {
   name = "Terminal",
   j = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
 }
 
+local builtin = require('telescope.builtin')
 lvim.builtin.which_key.mappings["s"] = vim.tbl_extend("keep", lvim.builtin.which_key.mappings["s"], {
   T = {
-    require("telescope.builtin").grep_string,
+    builtin.grep_string,
     "search word under cursor",
+  },
+  i = {
+    function()
+      builtin.live_grep({
+        prompt_title = "Find Text (Ignoring Test Files)",
+        glob_pattern = "!*.test.*",
+      })
+    end,
+    "Find Text (Ignore Test Files)",
+  },
+  x = {
+    builtin.treesitter,
+    "Search Code (Treesitter)",
+  },
+  o = {
+    builtin.current_buffer_fuzzy_find,
+    "Search Open Buffer",
   },
 })
 
@@ -331,7 +358,8 @@ lvim.plugins = {
   },
   { "nvim-treesitter/playground" },
   { "norcalli/nvim-colorizer.lua" },
-  { "EdenEast/nightfox.nvim" }
+  { "EdenEast/nightfox.nvim" },
+  { "tiagovla/scope.nvim" },
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
@@ -457,3 +485,4 @@ lvim.builtin.which_key.mappings["a"] = {
 }
 
 -- git blame -L 37,37 -l -- src/App.ts
+--
