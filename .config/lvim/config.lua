@@ -142,7 +142,7 @@ lvim.builtin.which_key.mappings["s"] = vim.tbl_extend("keep", lvim.builtin.which
 		function()
 			builtin.live_grep({
 				prompt_title = "Find Text (Ignoring Test Files)",
-				glob_pattern = "!*.test.*",
+        glob_pattern = [[!**/{acceptance,__test__}/*]],
 			})
 		end,
 		"Find Text (Ignore Test Files)",
