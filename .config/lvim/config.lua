@@ -61,8 +61,9 @@ vim.keymap.set("x", "<leader>p", '"_dP')
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
--- -- Change theme settings
--- lvim.colorscheme = "lunar"
+-- Move one or more lines up/down with indentation in visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -100,6 +101,7 @@ lvim.builtin.which_key.mappings["f"] = {
 	"Find File",
 }
 
+-- Reloads buffer
 lvim.builtin.which_key.mappings["r"] = {
 	":checktime<CR>",
 	"reload buffer",
@@ -142,7 +144,7 @@ lvim.builtin.which_key.mappings["s"] = vim.tbl_extend("keep", lvim.builtin.which
 		function()
 			builtin.live_grep({
 				prompt_title = "Find Text (Ignoring Test Files)",
-        glob_pattern = [[!**/{acceptance,__test__}/*]],
+				glob_pattern = [[!**/{acceptance,__test__}/*]],
 			})
 		end,
 		"Find Text (Ignore Test Files)",
