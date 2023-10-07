@@ -16,6 +16,8 @@ PATH="$HOME/.cargo/bin:$PATH"
 export PATH
 . "$HOME/.cargo/env"
 
+PATH="$HOME/go/bin:$PATH"
+
 # Add lunarvim etc. to path
 PATH="$HOME/.local/bin:$PATH"
 
@@ -67,3 +69,10 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
+
+# bun completions
+[ -s "/Users/danieladen/.bun/_bun" ] && source "/Users/danieladen/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

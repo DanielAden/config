@@ -31,7 +31,7 @@ vim.opt.autoread = true
 lvim.log.level = "info"
 lvim.format_on_save = {
 	enabled = true,
-	pattern = "*.lua,*.ts,*.tsx",
+	pattern = "*.lua,*.ts,*.tsx,*.go",
 	timeout = 2000,
 }
 -- to disable icons and use a minimalist setup, uncomment the following
@@ -91,6 +91,17 @@ require("lspconfig").tsserver.setup({
 		preferences = {
 			importModuleSpecifierPreference = "relative",
 			importModuleSpecifierEnding = "minimal",
+		},
+	},
+})
+
+require("lspconfig").gopls.setup({
+	settings = {
+		gopls = {
+			usePlaceholders = true,
+			analyses = {
+				unusedparams = true,
+			},
 		},
 	},
 })
@@ -307,6 +318,12 @@ formatters.setup({
 	-- {
 	--   { exe = "jq", args = { "--indent", "2" }, filetypes = { "json" } },
 	-- }
+	{
+		command = "gofumpt",
+	},
+	{
+		command = "golines",
+	},
 })
 
 local linters = require("lvim.lsp.null-ls.linters")
@@ -319,6 +336,7 @@ linters.setup({
 	{
 		command = "eslint_d",
 	},
+	{ command = "golangci-lint" },
 })
 
 local code_actions = require("lvim.lsp.null-ls.code_actions")
@@ -364,6 +382,7 @@ lvim.plugins = {
 	{ "norcalli/nvim-colorizer.lua" },
 	{ "EdenEast/nightfox.nvim" },
 	{ "tiagovla/scope.nvim" },
+	{ "windwp/nvim-ts-autotag" },
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
@@ -499,3 +518,5 @@ lvim.builtin.which_key.mappings["a"] = {
 --
 require("scope").setup({})
 require("telescope").load_extension("scope")
+
+require("nvim-ts-autotag").setup()
