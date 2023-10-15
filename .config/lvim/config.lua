@@ -54,7 +54,7 @@ lvim.keys.normal_mode["n"] = "nzzzv"
 lvim.keys.normal_mode["N"] = "Nzzzv"
 
 -- paste over selected text while preserving yanked text
-vim.keymap.set("x", "<leader>p", '"_dP')
+vim.keymap.set("x", "<Leader>p", '"_dP')
 
 -- -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
