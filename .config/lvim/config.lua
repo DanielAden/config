@@ -520,3 +520,11 @@ require("scope").setup({})
 require("telescope").load_extension("scope")
 
 require("nvim-ts-autotag").setup()
+
+-- require("nvim-tree").setup({
+--   view = {
+--      adaptive_size = true,
+--   },
+-- })
+--
+lvim.builtin.nvimtree.setup.view.adaptive_size = true
