@@ -305,7 +305,7 @@ vim.lsp.handlers["textDocument/references"] = require("telescope/builtin").lsp_r
 -- linters, formatters and code actions <https://www.lunarvim.org/docs/languages#lintingformatting>
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-  { command = "stylua" },
+  -- { command = "stylua" },
   -- {
   --   command = "prettier",
   --   -- extra_args = { "--print-width", "100" },
