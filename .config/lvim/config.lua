@@ -15,7 +15,7 @@ pcall(require, "user.personal-config")
 
 local SESSION_DIR = "~/.vimsessions"
 
-lvim.colorscheme = "carbonfox"
+lvim.colorscheme = "terafox"
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     vim.cmd([[hi MatchParen cterm=bold gui=bold guifg=none guibg=red]])
