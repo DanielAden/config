@@ -181,8 +181,9 @@ vim.api.nvim_create_user_command("ClearTestBuffers", function()
   local buffers = vim.api.nvim_list_bufs()
   for index, value in ipairs(buffers) do
     local name = vim.api.nvim_buf_get_name(value)
-    local isTestBuffer = string.find(name, "term://") and string.find(name, "react%-scripts")
-        or string.find(name, "jest")
+    local hasTestCommand = string.find(name, "react%-scripts") or string.find(name, "go test") or
+        string.find(name, "jest")
+    local isTestBuffer = string.find(name, "term://") and hasTestCommand
     if isTestBuffer then
       vim.cmd(string.format("bw! %s", value))
     end
