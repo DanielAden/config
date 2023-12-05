@@ -143,8 +143,11 @@ lvim.builtin.which_key.mappings["t"] = {
 lvim.builtin.which_key.mappings["b"]["f"] = { "<cmd>Telescope scope buffers<cr>", "Find Scoped Buffer" }
 
 lvim.builtin.which_key.mappings["j"] = {
-  name = "Terminal",
+  name = "Terminal/JSON",
   j = { "<cmd>ToggleTerm<cr>", "Open Terminal" },
+  -- Don't love this but hack to get work specific custom JSON formatter running somwhere in the keymaps
+  -- Eventually need to move to work config
+  f = { "<cmd>!cjson %:p<cr>", "Format JSON File" }
 }
 
 local builtin = require("telescope.builtin")
@@ -386,7 +389,7 @@ lvim.plugins = {
   { "EdenEast/nightfox.nvim" },
   { "tiagovla/scope.nvim" },
   { "windwp/nvim-ts-autotag" },
-  { "nvim-treesitter/nvim-treesitter-context" }
+  { "nvim-treesitter/nvim-treesitter-context" },
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
