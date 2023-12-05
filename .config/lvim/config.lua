@@ -390,6 +390,7 @@ lvim.plugins = {
   { "tiagovla/scope.nvim" },
   { "windwp/nvim-ts-autotag" },
   { "nvim-treesitter/nvim-treesitter-context" },
+  { "fatih/vim-go" }
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
@@ -570,3 +571,5 @@ require 'treesitter-context'.setup {
   zindex = 20,     -- The Z-index of the context window
   on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
+
+vim.g["go_addtags_transform"] = "camelcase"
