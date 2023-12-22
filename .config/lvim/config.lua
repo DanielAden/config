@@ -391,7 +391,8 @@ lvim.plugins = {
   { "windwp/nvim-ts-autotag" },
   { "nvim-treesitter/nvim-treesitter-context" },
   { "fatih/vim-go" },
-  { "ggandor/leap-spooky.nvim" }
+  { "ggandor/leap-spooky.nvim" },
+  { "christoomey/vim-tmux-navigator" }
 }
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
