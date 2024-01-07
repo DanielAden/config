@@ -160,7 +160,7 @@ lvim.builtin.which_key.mappings["s"] = vim.tbl_extend("keep", lvim.builtin.which
     function()
       builtin.live_grep({
         prompt_title = "Find Text (Ignoring Test Files)",
-        glob_pattern = [[!**/{acceptance,__test__}/*]],
+        glob_pattern = { "!**/acceptance/**", "!**/__test__/**", "!*.test.*" },
       })
     end,
     "Find Text (Ignore Test Files)",
@@ -287,6 +287,7 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pylyzer" })
 -- end
 --
 local actions = require("telescope.actions")
+local putils = require("telescope.previewers.utils")
 lvim.builtin.telescope.defaults = {
   wrap_results = true,
   layout_strategy = "horizontal",
@@ -301,6 +302,27 @@ lvim.builtin.telescope.defaults = {
     i = {
       ["<esc>"] = actions.close,
     },
+  },
+  preview = {
+    filetype_hook = function(filepath, bufnr, opts)
+      -- you could analogously check opts.ft for filetypes
+      local excluded = vim.tbl_filter(function(ending)
+        return filepath:match(ending)
+      end, {
+        ".*%.svg",
+      })
+      if not vim.tbl_isempty(excluded) then
+        putils.set_preview_message(
+          bufnr,
+          opts.winid,
+          string.format("Preview disabled for %s files",
+            excluded[1]:sub(5, -1))
+        )
+        return false
+      end
+      return true
+    end,
+
   },
 }
 

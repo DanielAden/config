@@ -1,6 +1,7 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 local actions = require("telescope.actions")
+local putils = require("telescope.previewers.utils")
 require('telescope').setup {
   defaults = {
     wrap_results = true,
@@ -16,6 +17,27 @@ require('telescope').setup {
       i = {
         ["<esc>"] = actions.close,
       },
+    },
+    preview = {
+      filetype_hook = function(filepath, bufnr, opts)
+        -- you could analogously check opts.ft for filetypes
+        local excluded = vim.tbl_filter(function(ending)
+          return filepath:match(ending)
+        end, {
+          ".*%.svg",
+        })
+        if not vim.tbl_isempty(excluded) then
+          putils.set_preview_message(
+            bufnr,
+            opts.winid,
+            string.format("Preview disabled for %s files",
+              excluded[1]:sub(5, -1))
+          )
+          return false
+        end
+        return true
+      end,
+
     },
   },
 }

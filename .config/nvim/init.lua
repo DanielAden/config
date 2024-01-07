@@ -4,6 +4,9 @@ vim.cmd([[
   source ~/.vimrc
 ]])
 
+
+-- require('firenvim')
+
 require 'lazy-bootstrap'
 
 require("lazy").setup("plugins")
