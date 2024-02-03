@@ -149,4 +149,5 @@ return {
       vim.fn["firenvim#install"](0)
     end,
   },
+  { "jose-elias-alvarez/null-ls.nvim" }
 }

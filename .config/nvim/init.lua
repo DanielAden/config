@@ -30,3 +30,5 @@ require 'vim-test-setup'
 require 'cmp-setup'
 
 require 'lsp-setup'
+
+require 'null_ls'
