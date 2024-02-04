@@ -7,6 +7,9 @@ vim.defer_fn(function()
     ensure_installed = {
       'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'json', 'jsonc'
     },
+    ignore_install = {},
+    modules = {},
+    sync_install = false,
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
