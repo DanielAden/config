@@ -105,7 +105,7 @@ vim.keymap.set('n', '<leader>sl', require('telescope.builtin').resume, { desc = 
 local function telescope_live_grep_ignore_test_files()
   require('telescope.builtin').live_grep {
     prompt_title = "Find Text (Ignoring Test Files)",
-    glob_pattern = { "!**/acceptance/**", "!**/__test__/**", "!*.test.*" },
+    glob_pattern = { "!**/acceptance/**", "!**/__test__/**", "!*.test.*", "!**/mocks/**", "!package-lock.json" },
     -- glob_pattern = { "!**/{acceptance,__test__}/*" },
   }
 end
@@ -134,5 +134,11 @@ vim.keymap.set('n', '<leader>sC', telescope_live_grep_config_files, { desc = "Gr
 
 -- vim.lsp.handlers["textDocument/references"] = require("telescope/builtin").lsp_references
 
+vim.api.nvim_create_user_command("FS", function(t)
+  local filetype = t.args;
+  require('telescope.builtin').live_grep({
+    type_filter = filetype
+  })
+end, { nargs = 1, desc = "Search by Filetype" })
 
 -- vim: ts=2 sts=2 sw=2 et
