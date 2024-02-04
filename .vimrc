@@ -39,7 +39,7 @@ set whichwrap=<,>,[,],h,l
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 map <leader>q :confirm q<CR>
-map <leader>w :w<CR>
+map <leader>w :w!<CR>
 
 
 " KEYMAPS -----------------------------------

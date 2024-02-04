@@ -5,8 +5,9 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "gy", "yiw")
 vim.keymap.set("n", "gY", "yiW")
 
+-- TODO differnt key bindings for these?
 vim.keymap.set('n', '<leader>bc', ":bd<CR>", { desc = 'Close Buffer' })
-vim.keymap.set('n', '<leader>bx', ":close<CR>", { desc = 'Close Buffer' })
+vim.keymap.set('n', '<leader>bw', ":close<CR>", { desc = 'Close Window' })
 
 
 -- Tabs
@@ -15,11 +16,7 @@ vim.keymap.set('n', '<leader>tp', ":tabprev<CR>", { desc = 'Tab Prev' })
 vim.keymap.set('n', '<leader>ta', ":tabnew<CR>", { desc = 'Tab Add' })
 
 -- Git
-vim.keymap.set('n', '<leader>gl', "<cmd>lua require 'gitsigns'.blame_line()<cr>", { desc = 'Tab Add' })
-
-vim.keymap.set('n', '<leader>tn', ":tabnext<CR>", { desc = 'Tab Next' })
-vim.keymap.set('n', '<leader>tp', ":tabprev<CR>", { desc = 'Tab Prev' })
-vim.keymap.set('n', '<leader>ta', ":tabnew<CR>", { desc = 'Tab Add' })
+vim.keymap.set('n', '<leader>gl', "<cmd>lua require 'gitsigns'.blame_line()<cr>", { desc = 'Git Blame Line' })
 
 -- ADO
 local utils = require('utils')
