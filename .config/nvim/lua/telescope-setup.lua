@@ -94,7 +94,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sr', function()
   require('telescope.builtin').oldfiles {
-    cwd = true
+    only_cwd = true
   }
 end, { desc = '[S]earch [R]ecent' })
 
