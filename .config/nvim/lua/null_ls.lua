@@ -1,16 +1,8 @@
 local null_ls = require("null-ls")
 
-null_ls.setup({
-  sources = {
-    -- null_ls.builtins.formatting.stylua,
-    null_ls.builtins.code_actions.eslint_d,
-    null_ls.builtins.diagnostics.eslint_d,
-    null_ls.builtins.formatting.prettierd,
-  },
-})
-
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-require("null-ls").setup({
+null_ls.setup({
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
   -- you can reuse a shared lspconfig on_attach callback here
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -21,9 +13,15 @@ require("null-ls").setup({
         callback = function()
           -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
           -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-          vim.lsp.buf.formatting_sync()
+          vim.lsp.buf.format({ asycn = false })
         end,
       })
     end
   end,
+  sources = {
+    -- null_ls.builtins.formatting.stylua,
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.prettierd,
+  },
 })
