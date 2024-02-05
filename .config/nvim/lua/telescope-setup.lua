@@ -134,7 +134,7 @@ vim.keymap.set('n', '<leader>sC', telescope_live_grep_config_files, { desc = "Gr
 
 -- vim.lsp.handlers["textDocument/references"] = require("telescope/builtin").lsp_references
 
-vim.api.nvim_create_user_command("FS", function(t)
+vim.api.nvim_create_user_command("SF", function(t)
   local filetype = t.args;
   require('telescope.builtin').live_grep({
     type_filter = filetype

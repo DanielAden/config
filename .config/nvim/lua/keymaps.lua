@@ -5,9 +5,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "gy", "yiw")
 vim.keymap.set("n", "gY", "yiW")
 
--- TODO differnt key bindings for these?
-vim.keymap.set('n', '<leader>bc', ":bd<CR>", { desc = 'Close Buffer' })
-vim.keymap.set('n', '<leader>bw', ":close<CR>", { desc = 'Close Window' })
+vim.keymap.set('n', '<leader>kw', ":close<CR>", { desc = '[k]ill [w]indow' })
+vim.keymap.set('n', '<leader>kt', ":tabclose<CR>", { desc = '[k]ill [t]ab' })
+-- using this instead of :bd<CR> to not affect current window/tab
+-- https://stackoverflow.com/a/63201958
+vim.keymap.set('n', '<leader>kc', ":bp|bd#<CR>", { desc = '[k]ill [c]urrent buffer' })
 
 
 -- Tabs
