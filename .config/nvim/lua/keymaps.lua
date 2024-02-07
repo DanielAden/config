@@ -25,3 +25,6 @@ local utils = require('utils')
 vim.keymap.set('n', '<leader>ob', utils.openFileInADO, { desc = 'Open File and Branch in ADO' })
 vim.keymap.set('n', '<leader>of', function() utils.openFileInADO('feature-int') end, { desc = 'Open Dev Branch in ADO' })
 vim.keymap.set('n', '<leader>od', function() utils.openFileInADO('develop') end, { desc = 'Open Test Branch in ADO' })
+
+-- code
+vim.keymap.set('n', '<leader>co', ":OrganizeImports<CR>", { desc = '[O]rganize Imports' })

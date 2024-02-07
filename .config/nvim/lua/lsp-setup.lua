@@ -2,6 +2,17 @@
 --
 -- helpful cmds
 -- :lua vim.print(vim.lsp.get_active_clients())
+--
+--
+local function organize_imports()
+  local params = {
+    command = "_typescript.organizeImports",
+    arguments = { vim.api.nvim_buf_get_name(0) },
+    title = "",
+  }
+  vim.lsp.buf.execute_command(params)
+end
+
 
 local show_line_diagnostics = function()
   local float = vim.diagnostic.config().float
@@ -93,12 +104,37 @@ require('mason-lspconfig').setup()
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
+
 local servers = {
   -- clangd = {},
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        usePlaceholders = true,
+        analyses = {
+          unusedparams = true,
+        },
+      },
+    },
+
+  },
   -- pyright = {},
   -- rust_analyzer = {},
-  tsserver = {},
+  tsserver = {
+    commands = {
+      OrganizeImports = {
+        organize_imports,
+        description = "Organize Imports",
+      },
+    },
+    init_options = {
+      preferences = {
+        importModuleSpecifierPreference = "relative",
+        importModuleSpecifierEnding = "minimal",
+      },
+    },
+    settings = {},
+  },
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -108,6 +144,7 @@ local servers = {
       -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
       -- diagnostics = { disable = { 'missing-fields' } },
     },
+    settings = {},
   },
   jsonls = {},
   pyright = {},
@@ -132,8 +169,10 @@ mason_lspconfig.setup_handlers {
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = servers[server_name],
+      settings = servers[server_name].settings,
       filetypes = (servers[server_name] or {}).filetypes,
+      commands = (servers[server_name] or {}).commands,
+      init_options = (servers[server_name] or {}).init_options,
     }
   end,
 }
@@ -198,5 +237,7 @@ local default_diagnostic_config = {
 }
 
 vim.diagnostic.config(default_diagnostic_config)
+
+
 
 -- vim: ts=2 sts=2 sw=2 et
