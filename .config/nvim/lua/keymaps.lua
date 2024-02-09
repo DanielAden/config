@@ -31,3 +31,5 @@ vim.keymap.set('n', '<leader>od', function() utils.openFileInADO('develop') end,
 
 -- code
 vim.keymap.set('n', '<leader>co', ":OrganizeImports<CR>", { desc = '[O]rganize Imports' })
+vim.keymap.set('n', '<leader>ca', ":AutoformatToggle<CR>", { desc = '[A]utoformat Toggle' })
+

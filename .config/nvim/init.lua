@@ -5,6 +5,8 @@ vim.cmd([[
 ]])
 
 
+vim.g.auto_format_enabled = true
+
 -- require('firenvim')
 
 require 'lazy-bootstrap'
