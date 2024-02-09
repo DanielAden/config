@@ -19,6 +19,9 @@ vim.keymap.set('n', '<leader>ta', ":tabnew<CR>", { desc = 'Tab Add' })
 
 -- Git
 vim.keymap.set('n', '<leader>gl', "<cmd>lua require 'gitsigns'.blame_line()<cr>", { desc = 'Git Blame Line' })
+vim.keymap.set('n', '<leader>di', ":DiffviewOpen<CR>", { desc = '[D]iffview [I]ndex' })
+vim.keymap.set('n', '<leader>df', ":DiffviewFileHistory %<CR>", { desc = '[D]iffview [F]ile History' })
+vim.keymap.set('n', '<leader>db', ":DiffviewFileHistory<CR>", { desc = '[D]iffview [F]ile History' })
 
 -- ADO
 local utils = require('utils')
