@@ -4,6 +4,8 @@ vim.cmd([[
   source ~/.vimrc
 ]])
 
+-- TODO LIST
+-- * look into nvim-spectre  
 
 vim.g.auto_format_enabled = true
 
