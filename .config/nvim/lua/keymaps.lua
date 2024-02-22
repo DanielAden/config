@@ -30,6 +30,6 @@ vim.keymap.set('n', '<leader>of', function() utils.openFileInADO('feature-int') 
 vim.keymap.set('n', '<leader>od', function() utils.openFileInADO('develop') end, { desc = 'Open Test Branch in ADO' })
 
 -- code
-vim.keymap.set('n', '<leader>co', ":OrganizeImports<CR>", { desc = '[O]rganize Imports' })
-vim.keymap.set('n', '<leader>ca', ":AutoformatToggle<CR>", { desc = '[A]utoformat Toggle' })
-
+vim.keymap.set('n', '<leader>co', ':OrganizeImports<CR>', { desc = '[O]rganize Imports' })
+vim.keymap.set('n', '<leader>ca', ':AutoformatToggle<CR>', { desc = '[A]utoformat Toggle' })
+vim.keymap.set('n', '<leader>cj', '<cmd>!cjson %:p<cr>', { desc = 'Format nested json'})

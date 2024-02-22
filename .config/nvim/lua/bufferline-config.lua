@@ -38,5 +38,5 @@ vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>")
 
 vim.keymap.set('n', '<leader>bj', ":BufferLinePick<CR>", { desc = 'Buffer Jump' })
 vim.keymap.set('n', '<leader>bp', ":BufferLineTogglePin<CR>", { desc = 'Pin Buffer' })
-vim.keymap.set('n', '<leader>bl', ":BufferLineCloseRight<CR>", { desc = 'Close Buffers Right' })
-vim.keymap.set('n', '<leader>bo', ":BufferLineCloseOthers<CR>", { desc = 'Close Other Buffers' })
+vim.keymap.set('n', '<leader>kr', ":BufferLineCloseRight<CR>", { desc = '[K]ill Buffers [R]ight' })
+vim.keymap.set('n', '<leader>ko', ":BufferLineCloseOthers<CR>", { desc = '[K]ill [O]ther' })
