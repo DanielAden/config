@@ -1,7 +1,11 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+-- Telescope default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
+local lga_actions = require("telescope-live-grep-args.actions")
 local actions = require("telescope.actions")
 local putils = require("telescope.previewers.utils")
+local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+
 require('telescope').setup {
   defaults = {
     wrap_results = true,
@@ -16,6 +20,8 @@ require('telescope').setup {
     mappings = {
       i = {
         ["<esc>"] = actions.close,
+        ["<C-j>"] = lga_actions.quote_prompt(),
+        ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
       },
     },
     preview = {
@@ -40,6 +46,22 @@ require('telescope').setup {
 
     },
   },
+  extensions = {
+    live_grep_args = {
+      auto_quoting = true, -- enable/disable auto-quoting
+      -- wasn't able to get this to work....
+      -- mappings = {         -- extend mappings
+      --   i = {
+      --     ["<C-j>"] = lga_actions.quote_prompt(),
+      --     ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+      --   },
+      -- },
+      -- ... also accepts theme settings, for example:
+      -- theme = "dropdown", -- use dropdown theme
+      -- theme = { }, -- use own theme spec
+      -- layout_config = { mirror=true }, -- mirror preview pane
+    }
+  }
 }
 
 -- Enable telescope fzf native, if installed
@@ -88,8 +110,11 @@ vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
 
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
-vim.keymap.set('n', '<leader>st', require('telescope.builtin').live_grep, { desc = '[S]earch by [T]ext' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+
+vim.keymap.set('n', '<leader>st', require("telescope").extensions.live_grep_args.live_grep_args,
+  { desc = '[S]earch by [T]ext' })
+vim.keymap.set('n', '<leader>sw', live_grep_args_shortcuts.grep_word_under_cursor, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('v', '<leader>sw', live_grep_args_shortcuts.grep_visual_selection, { desc = '[S]earch current [W]ord' })
 
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
 vim.keymap.set('n', '<leader>sr', function()
@@ -103,7 +128,13 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sl', require('telescope.builtin').resume, { desc = '[S]earch [L]ast' })
 local function telescope_live_grep_ignore_test_files()
-  require('telescope.builtin').live_grep {
+  -- require('telescope.builtin').live_grep {
+  --   prompt_title = "Find Text (Ignoring Test Files)",
+  --   glob_pattern = { "!**/acceptance/**", "!**/__test__/**", "!*.test.*", "!**/mocks/**", "!package-lock.json" },
+  --   -- glob_pattern = { "!**/{acceptance,__test__}/*" },
+  -- }
+  require('telescope').extensions.live_grep_args.live_grep_args
+  {
     prompt_title = "Find Text (Ignoring Test Files)",
     glob_pattern = { "!**/acceptance/**", "!**/__test__/**", "!*.test.*", "!**/mocks/**", "!package-lock.json" },
     -- glob_pattern = { "!**/{acceptance,__test__}/*" },

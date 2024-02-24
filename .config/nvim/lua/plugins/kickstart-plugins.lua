@@ -164,6 +164,7 @@ return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = {
+      "nvim-telescope/telescope-live-grep-args.nvim" ,
       'nvim-lua/plenary.nvim',
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
@@ -178,8 +179,10 @@ return {
         end,
       },
     },
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+    end
   },
-
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
