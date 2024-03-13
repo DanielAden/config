@@ -114,6 +114,7 @@ vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by 
 vim.keymap.set('n', '<leader>st', require("telescope").extensions.live_grep_args.live_grep_args,
   { desc = '[S]earch by [T]ext' })
 vim.keymap.set('n', '<leader>sw', live_grep_args_shortcuts.grep_word_under_cursor, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sW', require("telescope.builtin").grep_string, { desc = '[S]earch current [W]ord + Line' })
 vim.keymap.set('v', '<leader>sw', live_grep_args_shortcuts.grep_visual_selection, { desc = '[S]earch current [W]ord' })
 
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').buffers, { desc = '[S]earch [B]uffers' })
