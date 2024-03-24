@@ -5,7 +5,7 @@ vim.cmd([[
 ]])
 
 -- TODO LIST
--- * look into nvim-spectre  
+-- * look into retaining file history after close
 
 vim.g.auto_format_enabled = true
 
