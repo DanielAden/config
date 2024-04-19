@@ -239,5 +239,11 @@ local default_diagnostic_config = {
 vim.diagnostic.config(default_diagnostic_config)
 
 
+require("roslyn").setup({
+  dotnet_cmd = "dotnet",
+  roslyn_version = "4.8.0-3.23475.7",
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
 
 -- vim: ts=2 sts=2 sw=2 et

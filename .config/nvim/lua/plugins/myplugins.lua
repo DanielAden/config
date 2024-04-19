@@ -150,4 +150,5 @@ return {
   },
   { "jose-elias-alvarez/null-ls.nvim" },
   { "sindrets/diffview.nvim" },
+  {"jmederosalvarado/roslyn.nvim"}
 }
