@@ -29,6 +29,10 @@ return {
 	s("clog", {
 		t("console.log("), i(1, "key"), t(")")
 	}),
+
+	s("deconstruct", {
+		t("const { "), i(2, "fields"), t(" } = "), i(1, "var"), t(";"),
+	}),
 }
 
 
