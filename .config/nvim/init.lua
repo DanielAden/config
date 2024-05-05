@@ -8,6 +8,7 @@ vim.cmd([[
 -- * look into retaining file history after close
 
 vim.g.auto_format_enabled = true
+vim.g.inlay_hints_enabled = true
 
 -- require('firenvim')
 
@@ -36,3 +37,5 @@ require 'cmp-setup'
 require 'lsp-setup'
 
 require 'null_ls'
+
+require 'scratch'
