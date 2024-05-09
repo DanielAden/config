@@ -150,5 +150,7 @@ return {
   },
   { "jose-elias-alvarez/null-ls.nvim" },
   { "sindrets/diffview.nvim" },
-  {"jmederosalvarado/roslyn.nvim"}
+  {"jmederosalvarado/roslyn.nvim"},
+  {"tpope/vim-dadbod"},
+  {"kristijanhusak/vim-dadbod-ui"}
 }
