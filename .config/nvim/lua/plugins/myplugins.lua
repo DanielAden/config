@@ -162,5 +162,20 @@ return {
   { "sindrets/diffview.nvim" },
   {"jmederosalvarado/roslyn.nvim"},
   {"tpope/vim-dadbod"},
-  {"kristijanhusak/vim-dadbod-ui"}
+  {"kristijanhusak/vim-dadbod-ui"},
+  { "github/copilot.vim" }, 
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({})
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   config = function()
+  --     require("copilot_cmp").setup({})
+  --   end,
+  -- },
 }

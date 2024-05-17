@@ -44,10 +44,6 @@ else
   require 'null_ls'
 
   require 'scratch'
+
+  require 'copilot-setup'
 end
-
-
-
--- TODO LIST
--- * look into retaining file history after close
---
