@@ -137,7 +137,7 @@ local function telescope_live_grep_ignore_test_files()
   require('telescope').extensions.live_grep_args.live_grep_args
   {
     prompt_title = "Find Text (Ignoring Test Files)",
-    glob_pattern = { "!**/acceptance/**", "!**/__test__/**", "!*.test.*", "!**/mocks/**", "!package-lock.json" },
+    glob_pattern = { "!**/acceptance/**", "!**/__test__/**", "!*.test.*", "!**/mocks/**", "!package-lock.json", "!**/test/**" },
     -- glob_pattern = { "!**/{acceptance,__test__}/*" },
   }
 end
