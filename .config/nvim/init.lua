@@ -8,7 +8,7 @@ if vim.g.vscode then
   require("vscode_setup")
 else
   vim.g.auto_format_enabled = true
-  vim.g.inlay_hints_enabled = true
+  vim.g.inlay_hints_enabled = false
 
   -- require('firenvim')
 
