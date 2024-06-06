@@ -102,6 +102,12 @@ return {
       opleader = { line = '<leader>/', block = '<leader>?' },
     }
   },
+  {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      ft = { "markdown" },
+      build = function() vim.fn["mkdp#util#install"]() end,
+  },
   { "nvim-tree/nvim-tree.lua" },
   -- breadcrumbs
   {
