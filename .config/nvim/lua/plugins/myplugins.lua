@@ -123,6 +123,10 @@ return {
     event = "User FileOpened",
     enabled = true,
     dependencies = 'nvim-tree/nvim-web-devicons',
+    -- added version and commit to solve this issue:
+    -- https://github.com/akinsho/bufferline.nvim/issues/903
+    version = "*",
+    commit = "73540cb95f8d95aa1af3ed57713c6720c78af915",
   },
   { "EdenEast/nightfox.nvim" },
   {
