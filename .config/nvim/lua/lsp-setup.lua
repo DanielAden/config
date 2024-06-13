@@ -74,11 +74,11 @@ local on_attach = function(client, bufnr)
 
 
   if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint ~= nil then
-    vim.lsp.inlay_hint.enable(bufnr, vim.g.inlay_hints_enabled)
+    vim.lsp.inlay_hint.enable(vim.g.inlay_hints_enabled)
 
     vim.api.nvim_buf_create_user_command(bufnr, 'ToggleInlayHints', function(_)
       vim.g.inlay_hints_enabled = not vim.g.inlay_hints_enabled
-      vim.lsp.inlay_hint.enable(bufnr, vim.g.inlay_hints_enabled)
+      vim.lsp.inlay_hint.enable(vim.g.inlay_hints_enabled)
     end, { desc = 'Toggle Inlay Hints' })
   end
 end
