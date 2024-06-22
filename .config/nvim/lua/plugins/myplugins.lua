@@ -30,7 +30,6 @@ return {
       require("lsp_signature").setup()
     end,
   },
-  { "nvim-treesitter/playground" },
   { "norcalli/nvim-colorizer.lua" },
   { "EdenEast/nightfox.nvim" },
   {
