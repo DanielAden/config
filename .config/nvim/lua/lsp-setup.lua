@@ -226,22 +226,15 @@ require('lspconfig.ui.windows').default_options = {
 
 
 local icons = require("icons")
-local signs = {
-  { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-  { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-  { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-  { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
-}
-
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-end
-
 local default_diagnostic_config = {
   signs = {
     active = true,
-    values = signs,
-    text = { [vim.diagnostic.severity.ERROR] = 'M', },
+    text = {
+      [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+      [vim.diagnostic.severity.WARN] = icons.diagnostics.Warning,
+      [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+      [vim.diagnostic.severity.INFO] = icons.diagnostics.Information,
+    },
   },
   virtual_text = true,
   update_in_insert = false,
@@ -256,9 +249,7 @@ local default_diagnostic_config = {
     prefix = "",
   },
 }
-
 vim.diagnostic.config(default_diagnostic_config)
-
 
 require("roslyn").setup({
   dotnet_cmd = "dotnet",
