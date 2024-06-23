@@ -20,6 +20,8 @@ else
   vim.g.inlay_hints_enabled = false
 
   -- require('firenvim')
+  --
+  require 'ui'
 
   require 'options'
 
@@ -39,7 +41,7 @@ else
 
   require 'cmp-setup'
 
-  require 'lsp-setup'
+  -- require 'lsp-setup'
 
   require 'null_ls'
 
