@@ -31,8 +31,13 @@ vim.keymap.set('n', '<leader>od', function() utils.openFileInADO('develop') end,
 
 -- code
 vim.keymap.set('n', '<leader>co', ':OrganizeImports<CR>', { desc = '[O]rganize Imports' })
-vim.keymap.set('n', '<leader>ca', ':AutoformatToggle<CR>', { desc = '[A]utoformat Toggle' })
 vim.keymap.set('n', '<leader>cj', '<cmd>!cjson %:p<CR>', { desc = 'Format nested json'})
 vim.keymap.set('n', '<leader>cm', [[<cmd>%s/\r/\r/g<CR>]], { desc = 'Convert ^M Carriage Returns to Normal Returns'})
-vim.keymap.set('n', '<leader>ci', ':ToggleInlayHints<CR>', { desc = 'Toggle Inlay Hints'})
 vim.keymap.set('n', '<leader>cc', ':TSContextToggle<CR>', { desc = 'Toggle TS Context'})
+
+
+-- toggle
+vim.keymap.set('n', '<leader>ca', function()
+  vim.g.auto_format_enabled = not vim.g.auto_format_enabled
+  vim.print('Autoformat ' .. tostring(vim.g.auto_format_enabled))
+end, { desc = '[A]utoformat Toggle' })
