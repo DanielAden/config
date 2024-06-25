@@ -2,10 +2,6 @@ return {
 	{
 		"vim-test/vim-test",
 	},
-	{
-		"folke/trouble.nvim",
-		cmd = "TroubleToggle",
-	},
 	{ "tpope/vim-repeat" },
 	{
 		"tpope/vim-surround",
