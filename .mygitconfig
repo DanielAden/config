@@ -1,0 +1,64 @@
+
+[alias]
+	aliases = config --get-regexp alias
+
+	fi = checkout feature-int
+	dev = checkout develop
+	com = checkout commmon/1
+
+	co = checkout
+
+	declog = log --oneline --decorate
+
+	rbdev = pull --rebase origin develop
+
+	rbfi = pull --rebase origin feature-int 
+
+	fc = commit -a --no-verify -m  
+
+	fa = commit -a --no-verify --amend --no-edit
+
+	amend = commit --no-verify --amend --no-edit
+
+	reopen = reset --soft HEAD~1
+
+	toremote = "!git fetch origin && git reset --hard \"origin/$(git symbolic-ref --short HEAD)\""
+
+	rp = recent -p
+
+	publish = push -u origin HEAD
+
+	# Keeping Delta as default tool because of potential performance issues with using
+	# difftastic, but make it available through aliases.  Using format c{action} as in 
+	# "code action".  ex cdiff === "code diff"
+	cdiff = "!GIT_EXTERNAL_DIFF=difft git diff"
+	cshow = "!GIT_EXTERNAL_DIFF=difft git show --ext-diff"
+
+        # git add -u 
+
+	# Follow evolution of certain lines in a file
+	# arg1=file, arg2=first line, arg3=last line or blank for just the first line
+	# From https://stackoverflow.com/a/19757441/17082638
+	follow = "!sh -c 'git log --topo-order -u -L $2,${3:-$2}:"$1"'" -
+
+	where = "config --list --show-origin"
+[core]
+	autocrlf = false
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true    # use n and N to move between diff sections
+	light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+	side-by-side = true
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[rerere]
+	enabled = true
