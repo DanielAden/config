@@ -27,7 +27,6 @@ return {
 		end,
 	},
 	{ "norcalli/nvim-colorizer.lua" },
-	{ "EdenEast/nightfox.nvim" },
 	{
 		"tiagovla/scope.nvim",
 		config = function()
