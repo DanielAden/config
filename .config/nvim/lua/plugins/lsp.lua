@@ -25,12 +25,22 @@ local function organize_imports_ts()
 	vim.lsp.buf.execute_command(params)
 end
 
+local tsjsFormatOnSave = function()
+	if not vim.g.auto_format_enabled then
+		return
+	end
+	vim.cmd("EslintFixAll")
+	vim.print("EslintFixAll")
+end
+
 --  Add any additional override configuration in the following tables. Available keys are:
 --  - cmd (table): Override the default command used to start the server
 --  - filetypes (table): Override the default list of associated filetypes for the server
 --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 --  - settings (table): Override the default settings passed when initializing the server.
 --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+--	- see the following for more information on server configurations
+--    - https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local servers = {
 	-- clangd = {},
 	gopls = {
@@ -79,6 +89,20 @@ local servers = {
 	jsonls = {},
 	pyright = {},
 	csharp_ls = {},
+	eslint = {
+		on_attach = function(client, bufnr)
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = bufnr,
+				callback = tsjsFormatOnSave,
+			})
+		end,
+		settings = {
+			codeActionOnSave = {
+				enable = true,
+				mode = "all",
+			},
+		},
+	},
 }
 
 return { -- LSP Configuration & Plugins
