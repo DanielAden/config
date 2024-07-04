@@ -1,3 +1,12 @@
+-- Color paren matches bright red
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		vim.cmd([[hi MatchParen cterm=bold gui=bold guifg=none guibg=red]])
+		vim.cmd([[hi clear CursorLine]])
+		vim.cmd([[hi CursorLine gui=underline cterm=underline]])
+	end,
+})
+
 -- vim.cmd.colorscheme("terafox")
 vim.cmd.colorscheme("rose-pine")
 
@@ -44,15 +53,6 @@ local default_diagnostic_config = {
 	},
 }
 vim.diagnostic.config(default_diagnostic_config)
-
--- Color paren matches bright red
-vim.api.nvim_create_autocmd("ColorScheme", {
-	callback = function()
-		vim.cmd([[hi MatchParen cterm=bold gui=bold guifg=none guibg=red]])
-		vim.cmd([[hi clear CursorLine]])
-		vim.cmd([[hi CursorLine gui=underline cterm=underline]])
-	end,
-})
 
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {

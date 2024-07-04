@@ -1,4 +1,5 @@
-local disable_filetypes = { c = true, cpp = true, typescriptreact = true }
+local lsp_fallback_disable_filetypes =
+	{ c = true, cpp = true, typescript = true, javascript = true, typescriptreact = true, javascriptreact = true }
 
 local tsjsConfig = {
 	-- "eslint",
@@ -29,7 +30,7 @@ return { -- Autoformat
 
 			return {
 				timeout_ms = 3000,
-				lsp_fallback = false, -- not disable_filetypes[vim.bo[bufnr].filetype],
+				lsp_fallback = not lsp_fallback_disable_filetypes[vim.bo[bufnr].filetype],
 			}
 		end,
 		formatters_by_ft = {
