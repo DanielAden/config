@@ -7,13 +7,19 @@ vim.cmd([[
 require("lazy-bootstrap")
 
 require("lazy").setup({
-	{ import = "plugins", cond = function()
-		return not vim.g.vscode
-	end },
+	{
+		import = "plugins",
+		cond = function()
+			return not vim.g.vscode
+		end,
+	},
 	-- { import = "user.plugins_always",    cond = true },
-	{ import = "vscode_plugins", cond = function()
-		return vim.g.vscode
-	end },
+	{
+		import = "vscode_plugins",
+		cond = function()
+			return vim.g.vscode
+		end,
+	},
 })
 
 if vim.g.vscode then
@@ -35,8 +41,6 @@ else
 	require("which-key-setup")
 
 	require("bufferline-config")
-
-	require("telescope-setup")
 
 	require("treesitter-setup")
 
