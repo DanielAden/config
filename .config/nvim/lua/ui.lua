@@ -9,6 +9,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 -- vim.cmd.colorscheme("terafox")
 vim.cmd.colorscheme("rose-pine")
+--
+-- vim.g.gruvbox_material_background = "hard"
+-- vim.cmd.colorscheme("gruvbox-material")
 
 local _border = "single"
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
