@@ -58,7 +58,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					prompt_position = "top",
 					width = 0.95,
 					height = 0.90,
-					preview_width = 0.5,
+					-- preview_width = 0.5,
 				},
 				sorting_strategy = "ascending",
 				mappings = {
@@ -181,6 +181,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		)
 		vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
+		vim.keymap.set("n", "<leader>se", function()
+			require("telescope.builtin").diagnostics({
+				severity_limit = vim.diagnostic.severity.ERROR,
+			})
+		end, { desc = "[S]earch [E]rror Diagnostics" })
 		vim.keymap.set("n", "<leader>sl", require("telescope.builtin").resume, { desc = "[S]earch [L]ast" })
 
 		local function telescope_live_grep_ignore_test_files()
