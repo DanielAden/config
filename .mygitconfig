@@ -2,17 +2,11 @@
 [alias]
 	aliases = config --get-regexp alias
 
-	fi = checkout feature-int
-	dev = checkout develop
-	com = checkout commmon/1
-
 	co = checkout
 
+  wt = worktree
+
 	declog = log --oneline --decorate
-
-	rbdev = pull --rebase origin develop
-
-	rbfi = pull --rebase origin feature-int 
 
 	fc = commit -a --no-verify -m  
 
