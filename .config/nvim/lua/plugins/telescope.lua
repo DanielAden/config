@@ -74,9 +74,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				mappings = {
 					i = {
 						["<esc>"] = actions.close,
+						["<tab>"] = lga_actions.quote_prompt(),
 						["<C-i>"] = lga_actions.quote_prompt({
+							postfix = "  --iglob ",
+						}),
+						["<C-t>"] = lga_actions.quote_prompt({
 							postfix = "  --type ",
 						}),
+						-- freeze the current list and start a fuzzy search in the frozen list
+						["<C-space>"] = actions.to_fuzzy_refine,
 					},
 				},
 				preview = {
