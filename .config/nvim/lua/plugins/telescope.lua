@@ -3,6 +3,16 @@ local lga_actions = require("telescope-live-grep-args.actions")
 local actions = require("telescope.actions")
 local putils = require("telescope.previewers.utils")
 local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+local utils = require("utils")
+
+local ignore_glob_pattern = {
+	"!**/acceptance/**",
+	"!**/__test__/**",
+	"!*.test.*",
+	"!**/mocks/**",
+	"!package-lock.json",
+	"!**/test/**",
+}
 
 return { -- Fuzzy Finder (files, lsp, etc)
 	"nvim-telescope/telescope.nvim",
@@ -147,23 +157,46 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			require("telescope").extensions.live_grep_args.live_grep_args,
 			{ desc = "[S]earch by [T]ext" }
 		)
-		vim.keymap.set(
-			"n",
-			"<leader>sw",
-			live_grep_args_shortcuts.grep_word_under_cursor,
-			{ desc = "[S]earch current [W]ord" }
-		)
+
+		local function telescope_search_word_ignore_test_files()
+			local ignore_args = utils.map(ignore_glob_pattern, function(s)
+				return "--iglob=" .. s
+			end)
+			live_grep_args_shortcuts.grep_word_under_cursor({
+				prompt_title = "Search Word (Ignoring Test Files)",
+				additional_args = ignore_args,
+			})
+		end
+		vim.keymap.set("n", "<leader>sw", telescope_search_word_ignore_test_files, { desc = "[S]earch current [W]ord" })
+
 		vim.keymap.set(
 			"n",
 			"<leader>sW",
 			require("telescope.builtin").grep_string,
 			{ desc = "[S]earch current [W]ord + Line" }
 		)
+
+		local function grep_visual_selection_ignore_test_files()
+			local ignore_args = utils.map(ignore_glob_pattern, function(s)
+				return "--iglob=" .. s
+			end)
+			live_grep_args_shortcuts.grep_visual_selection({
+				prompt_title = "Search Visual Selection (Ignoring Test Files)",
+				additional_args = ignore_args,
+			})
+		end
 		vim.keymap.set(
 			"v",
 			"<leader>sw",
+			grep_visual_selection_ignore_test_files,
+			{ desc = "[S]earch Visual Selection (Ignoring Test Files)" }
+		)
+
+		vim.keymap.set(
+			"v",
+			"<leader>sW",
 			live_grep_args_shortcuts.grep_visual_selection,
-			{ desc = "[S]earch current [W]ord" }
+			{ desc = "[S]earch Visual Selection" }
 		)
 
 		vim.keymap.set("n", "<leader>sb", require("telescope.builtin").buffers, { desc = "[S]earch [B]uffers" })
@@ -188,24 +221,20 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		end, { desc = "[S]earch [E]rror Diagnostics" })
 		vim.keymap.set("n", "<leader>sl", require("telescope.builtin").resume, { desc = "[S]earch [L]ast" })
 
-		local function telescope_live_grep_ignore_test_files()
-			require("telescope.builtin").live_grep({
+		local function telescope_live_grep_args_ignore_test_files()
+			local ignore_args = utils.map(ignore_glob_pattern, function(s)
+				return "--iglob=" .. s
+			end)
+			require("telescope").extensions.live_grep_args.live_grep_args({
 				prompt_title = "Find Text (Ignoring Test Files)",
-				glob_pattern = {
-					"!**/acceptance/**",
-					"!**/__test__/**",
-					"!*.test.*",
-					"!**/mocks/**",
-					"!package-lock.json",
-					"!**/test/**",
-				},
+				additional_args = ignore_args,
 			})
 		end
 
 		vim.keymap.set(
 			"n",
 			"<leader>si",
-			telescope_live_grep_ignore_test_files,
+			telescope_live_grep_args_ignore_test_files,
 			{ desc = "Search Files (Ignoring Test Files)" }
 		)
 
