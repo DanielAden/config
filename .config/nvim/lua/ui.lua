@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 -- Color paren matches bright red
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
@@ -7,8 +9,18 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
+local colorschemes = {
+	"terafox",
+	"rose-pine",
+	"rose-pine-main",
+	"nightfox",
+	"retrobox",
+	"onenord",
+}
+
+vim.cmd.colorscheme(colorschemes[utils.getRandomNumers(1, #colorschemes)])
 -- vim.cmd.colorscheme("terafox")
-vim.cmd.colorscheme("rose-pine")
+-- vim.cmd.colorscheme("rose-pine")
 --
 -- vim.g.gruvbox_material_background = "hard"
 -- vim.cmd.colorscheme("gruvbox-material")

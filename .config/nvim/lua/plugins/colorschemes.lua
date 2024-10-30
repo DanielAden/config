@@ -10,4 +10,5 @@ return {
 	{ "EdenEast/nightfox.nvim" },
 	{ "rose-pine/neovim", name = "rose-pine" },
 	{ "sainnhe/gruvbox-material" },
+	{ "rmehri01/onenord.nvim" },
 }

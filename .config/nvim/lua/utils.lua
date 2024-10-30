@@ -47,4 +47,10 @@ M.map = function(tbl, f)
 	return t
 end
 
+M.getRandomNumers = function(s, e)
+	math.randomseed(os.time())
+	local randomNumber = math.random(s, e)
+	return randomNumber
+end
+
 return M
