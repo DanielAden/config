@@ -218,6 +218,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			require("telescope.builtin").builtin,
 			{ desc = "[S]earch [S]elect Telescope" }
 		)
+		vim.keymap.set("n", "<leader>sm", require("telescope.builtin").marks, { desc = "[S]earch [M]arks" })
 		vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
 		vim.keymap.set("n", "<leader>se", function()
