@@ -19,7 +19,6 @@ vim.g["test#preserve_screen"] = 0
 vim.g["test#javascript#jest#options"] = "--watchAll=false"
 vim.g["test#javascript#reactscripts#options"] = "--watchAll=false --env=jsdom"
 vim.g["test#neovim#start_normal"] = 1
--- vim.g["test#enabled_runners"] = ["javascript#jest"];
 --
 
 -- Until I figure out a better way to do this, this value seems to work on both of my currently desired monitors...

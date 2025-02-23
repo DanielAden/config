@@ -36,6 +36,9 @@ set nowrap
 
 set whichwrap=<,>,[,],h,l
 
+set ignorecase
+set smartcase
+
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 map <leader>q :confirm q<CR>

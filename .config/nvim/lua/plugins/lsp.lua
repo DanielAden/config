@@ -53,7 +53,6 @@ local servers = {
 			},
 		},
 	},
-	-- pyright = {},
 	-- rust_analyzer = {},
 	tsserver = {
 		init_options = {
@@ -87,7 +86,27 @@ local servers = {
 		settings = {},
 	},
 	jsonls = {},
-	pyright = {},
+	pyright = {
+		autostart = false,
+		settings = {
+			python = {
+				analysis = {
+					typeCheckingMode = "basic",
+				},
+			},
+			pyright = {},
+		},
+	},
+	basedpyright = {
+		autostart = true,
+		settings = {
+			basedpyright = {
+				analysis = {
+					typeCheckingMode = "basic",
+				},
+			},
+		},
+	},
 	csharp_ls = {},
 	eslint = {
 		on_attach = function(client, bufnr)
@@ -100,6 +119,22 @@ local servers = {
 			codeActionOnSave = {
 				enable = true,
 				mode = "all",
+			},
+		},
+	},
+	cucumber_language_server = {
+		root_dir = function()
+			return vim.fn.getcwd()
+		end,
+		settings = {
+			cucumber = {
+				features = {
+					"**/*.feature",
+				},
+				glue = {
+					"**/StepDefinitions/**/*.cs",
+					"**/Steps/**/*.cs",
+				},
 			},
 		},
 	},
