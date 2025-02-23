@@ -122,6 +122,7 @@ local servers = {
 			},
 		},
 	},
+	-- NOTE requires Node 18
 	cucumber_language_server = {
 		root_dir = function()
 			return vim.fn.getcwd()
