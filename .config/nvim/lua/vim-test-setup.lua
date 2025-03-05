@@ -16,8 +16,8 @@ end, { nargs = 0 })
 
 vim.g["test#strategy"] = "neovim"
 vim.g["test#preserve_screen"] = 0
-vim.g["test#javascript#jest#options"] = "--watchAll=false"
-vim.g["test#javascript#reactscripts#options"] = "--watchAll=false --env=jsdom"
+vim.g["test#javascript#jest#options"] = "--watchAll=false --coverage=false"
+vim.g["test#javascript#reactscripts#options"] = "--watchAll=false --env=jsdom --coverage=false"
 vim.g["test#neovim#start_normal"] = 1
 --
 

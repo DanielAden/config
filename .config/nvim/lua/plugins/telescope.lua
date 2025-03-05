@@ -12,6 +12,7 @@ local ignore_glob_pattern = {
 	"!**/mocks/**",
 	"!package-lock.json",
 	"!**/test/**",
+	"!**/*UnitTests*/**",
 }
 
 return { -- Fuzzy Finder (files, lsp, etc)
