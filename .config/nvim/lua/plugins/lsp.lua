@@ -2,9 +2,9 @@
 --
 -- Use your language server to automatically format your code on save.
 -- Adds additional commands as well to manage the behavior
---
---
---
+
+local utils = require("utils")
+
 local show_line_diagnostics = function()
 	local float = vim.diagnostic.config().float
 
@@ -107,7 +107,6 @@ local servers = {
 			},
 		},
 	},
-	csharp_ls = {},
 	eslint = {
 		on_attach = function(client, bufnr)
 			vim.api.nvim_create_autocmd("BufWritePre", {
@@ -122,6 +121,9 @@ local servers = {
 			},
 		},
 	},
+}
+
+local workServers = {
 	-- NOTE requires Node 18
 	cucumber_language_server = {
 		root_dir = function()
@@ -139,7 +141,12 @@ local servers = {
 			},
 		},
 	},
+	csharp_ls = {},
 }
+
+if vim.g.which_comp == "WORK" then
+	servers = vim.tbl_extend("force", servers, workServers)
+end
 
 return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",

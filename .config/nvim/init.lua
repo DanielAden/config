@@ -4,6 +4,8 @@ vim.cmd([[
   source ~/.vimrc
 ]])
 
+vim.g.which_comp = os.getenv("WHICH_COMP")
+
 require("lazy-bootstrap")
 
 require("lazy").setup({
