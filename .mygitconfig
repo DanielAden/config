@@ -12,6 +12,8 @@
 
 	fa = commit -a --no-verify --amend --no-edit
 
+  ca = commit --amend
+
 	amend = commit --no-verify --amend --no-edit
 
 	reopen = reset --soft HEAD~1

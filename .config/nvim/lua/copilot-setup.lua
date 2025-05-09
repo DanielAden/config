@@ -6,11 +6,11 @@
 -- })
 -- vim.g.copilot_no_tab_map = true
 
-vim.keymap.set({ "n", "v" }, "<leader><leader>cc", ":CopilotChatToggle<CR>", { desc = "[C]opilot [C]hat Toggle" })
-vim.keymap.set({ "n", "v" }, "<leader><leader>cx", ":CopilotChatClose<CR>", { desc = "[C]opilot [C]hat Toggle" })
-vim.keymap.set({ "n", "v" }, "<leader><leader>cr", ":CopilotChatReset<CR>", { desc = "[C]opilot Chat [R]eset" })
+vim.keymap.set({ "n", "v" }, "<leader>gg", ":CopilotChatToggle<CR>", { desc = "[C]opilot [C]hat Toggle" })
+vim.keymap.set({ "n", "v" }, "<leader>gx", ":CopilotChatClose<CR>", { desc = "[C]opilot [C]hat Toggle" })
+vim.keymap.set({ "n", "v" }, "<leader>gr", ":CopilotChatReset<CR>", { desc = "[C]opilot Chat [R]eset" })
 
-vim.keymap.set({ "n", "v" }, "<leader><leader>ct", ":CopilotChatTests<CR>", { desc = "[C]opilot Chat [T]ests" })
-vim.keymap.set({ "n", "v" }, "<leader><leader>cf", ":CopilotChatFix<CR>", { desc = "[C]opilot Chat [F]ix" })
-vim.keymap.set({ "n", "v" }, "<leader><leader>cd", ":CopilotChatDocs<CR>", { desc = "[C]opilot Chat [D]ocs" })
-vim.keymap.set({ "n", "v" }, "<leader><leader>co", ":CopilotChatOptimize<CR>", { desc = "[C]opilot Chat [O]ptimize" })
+vim.keymap.set({ "n", "v" }, "<leader>gt", ":CopilotChatTests<CR>", { desc = "[C]opilot Chat [T]ests" })
+vim.keymap.set({ "n", "v" }, "<leader>gf", ":CopilotChatFix<CR>", { desc = "[C]opilot Chat [F]ix" })
+vim.keymap.set({ "n", "v" }, "<leader>gd", ":CopilotChatDocs<CR>", { desc = "[C]opilot Chat [D]ocs" })
+vim.keymap.set({ "n", "v" }, "<leader>go", ":CopilotChatOptimize<CR>", { desc = "[C]opilot Chat [O]ptimize" })
