@@ -1,10 +1,14 @@
+# Include in .gitconfig using:
+# [include]
+#   path = ~/.mygitconfig
+
 
 [alias]
 	aliases = config --get-regexp alias
 
 	co = checkout
 
-  wt = worktree
+        wt = worktree
 
 	declog = log --oneline --decorate
 
@@ -12,7 +16,9 @@
 
 	fa = commit -a --no-verify --amend --no-edit
 
-  ca = commit --amend
+        ca = commit --amend
+
+	cp = cherry-pick
 
 	amend = commit --no-verify --amend --no-edit
 
