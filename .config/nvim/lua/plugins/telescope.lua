@@ -1,10 +1,4 @@
 -- Telescope default mappings: https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
-local lga_actions = require("telescope-live-grep-args.actions")
-local actions = require("telescope.actions")
-local putils = require("telescope.previewers.utils")
-local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
-local utils = require("utils")
-
 local ignore_glob_pattern = {
 	"!**/acceptance/**",
 	"!**/__test__/**",
@@ -20,6 +14,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 	event = "VimEnter",
 	branch = "0.1.x",
 	dependencies = {
+		"nvim-telescope/telescope-live-grep-args.nvim",
 		"nvim-lua/plenary.nvim",
 		{ -- If encountering errors, see telescope-fzf-native README for installation instructions
 			"nvim-telescope/telescope-fzf-native.nvim",
@@ -40,6 +35,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 	},
 	config = function()
+		require("telescope").load_extension("live_grep_args")
+
+		local lga_actions = require("telescope-live-grep-args.actions")
+		local actions = require("telescope.actions")
+		local putils = require("telescope.previewers.utils")
+		local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+		local utils = require("utils")
+
 		-- Telescope is a fuzzy finder that comes with a lot of different things that
 		-- it can fuzzy find! It's more than just a "file finder", it can search
 		-- many different aspects of Neovim, your workspace, LSP, and more!
