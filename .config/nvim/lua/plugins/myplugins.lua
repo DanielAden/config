@@ -154,7 +154,16 @@ return {
 			vim.fn["firenvim#install"](0)
 		end,
 	},
-	{ "sindrets/diffview.nvim" },
+	{
+		"sindrets/diffview.nvim",
+		config = function()
+			require("diffview").setup({
+				merge_tool = {
+					layout = "diff3_mixed",
+				},
+			})
+		end,
+	},
 	{ "jmederosalvarado/roslyn.nvim" },
 	{ "tpope/vim-dadbod" },
 	{ "kristijanhusak/vim-dadbod-ui" },
