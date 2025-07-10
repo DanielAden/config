@@ -158,8 +158,10 @@ return {
 		"sindrets/diffview.nvim",
 		config = function()
 			require("diffview").setup({
-				merge_tool = {
-					layout = "diff3_mixed",
+				view = {
+					merge_tool = {
+						layout = "diff3_mixed",
+					},
 				},
 			})
 		end,
