@@ -11,11 +11,11 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 local colorschemes = {
 	"terafox",
-	"rose-pine",
-	"rose-pine-main",
+	-- "rose-pine",
+	"rose-pine-moon",
 	"nightfox",
 	"retrobox",
-	"onenord",
+	-- "onenord",
 }
 
 vim.cmd.colorscheme(colorschemes[utils.getRandomNumers(1, #colorschemes)])

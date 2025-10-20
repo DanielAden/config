@@ -7,6 +7,7 @@ vim.api.nvim_create_user_command("ClearTestBuffers", function()
 			or string.find(name, "go test")
 			or string.find(name, "jest")
 			or string.find(name, "pytest")
+			or string.find(name, "-m unittest")
 		local isTestBuffer = string.find(name, "term://") and hasTestCommand
 		if isTestBuffer then
 			vim.cmd(string.format("bw! %s", value))

@@ -28,6 +28,14 @@ vim.keymap.set(
 	{ desc = "[D]iffview [P]ull Request View (develop branch)" }
 )
 
+vim.api.nvim_create_user_command("PR", function(b)
+	b.args = b.args or "develop"
+	vim.cmd(
+		string.format(":DiffviewOpen origin/%s...HEAD --imply-local", vim.fn.trim(b.args)),
+		{ desc = "Open Pull Request Diff" }
+	)
+end, { nargs = 1 })
+
 -- ADO
 local utils = require("utils")
 vim.keymap.set("n", "<leader>ob", utils.openFileInADO, { desc = "Open File and Branch in ADO" })
@@ -37,6 +45,9 @@ end, { desc = "Open Dev Branch in ADO" })
 vim.keymap.set("n", "<leader>od", function()
 	utils.openFileInADO("develop")
 end, { desc = "Open Test Branch in ADO" })
+vim.keymap.set("n", "<leader>om", function()
+	utils.openFileInADO("master")
+end, { desc = "Open master Branch in ADO" })
 
 -- code
 vim.keymap.set("n", "<leader>co", ":OrganizeImports<CR>", { desc = "[O]rganize Imports" })
