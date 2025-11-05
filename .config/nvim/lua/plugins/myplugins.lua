@@ -178,4 +178,7 @@ return {
 	{ "jmederosalvarado/roslyn.nvim" },
 	{ "tpope/vim-dadbod" },
 	{ "kristijanhusak/vim-dadbod-ui" },
+
+	{ "vim-denops/denops.vim" },
+	{ "kbwo/vim-shareedit" },
 }

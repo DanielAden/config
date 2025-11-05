@@ -82,3 +82,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Aliases
 alias ncon="cd ~/.config/nvim; nvim"
 
+. "/Users/dat3631/.deno/env"
