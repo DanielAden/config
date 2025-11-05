@@ -1,3 +1,4 @@
+local utils = require("utils")
 -- local Job = require("plenary.job");
 
 -- local group = vim.api.nvim_create_augroup("TestAutoGroup", { clear = true })
@@ -17,3 +18,6 @@
 --     end,
 --   }):sync() -- or start()
 -- end, { nargs = 0 })
+--
+
+-- Replaces {{ field }} with the value. ex: "{{tenantSchema}}" -> "T99999999"

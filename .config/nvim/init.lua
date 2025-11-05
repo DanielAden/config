@@ -5,6 +5,7 @@ vim.cmd([[
 ]])
 
 vim.g.which_comp = os.getenv("WHICH_COMP")
+vim.g.servicebus_config_location = os.getenv("SERVICEBUS_CONFIG_LOCATION")
 
 require("lazy-bootstrap")
 
@@ -53,4 +54,6 @@ else
 	require("scratch")
 
 	require("copilot-setup")
+
+	require("servicebus")
 end
