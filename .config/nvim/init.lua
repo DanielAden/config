@@ -53,7 +53,7 @@ else
 
 	require("scratch")
 
-	require("copilot-setup")
-
 	require("servicebus")
+
+	require("codecompanion-setup")
 end

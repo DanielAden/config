@@ -181,4 +181,19 @@ return {
 
 	{ "vim-denops/denops.vim" },
 	{ "kbwo/vim-shareedit" },
+	-- Only enable one of these at a time
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "codecompanion" },
+	},
+	-- {
+	-- 	"OXY2DEV/markview.nvim",
+	-- 	lazy = false,
+	-- 	opts = {
+	-- 		preview = {
+	-- 			filetypes = { "markdown", "codecompanion" },
+	-- 			ignore_buftypes = {},
+	-- 		},
+	-- 	},
+	-- },
 }
