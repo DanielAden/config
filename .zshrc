@@ -84,3 +84,14 @@ alias ncon="cd ~/.config/nvim; nvim"
 alias path="echo $PATH | tr : '\n'"
 
 . "${HOME}/.deno/env"
+
+# FNs
+
+## Activate Python virtual environment in current directory
+activate() {
+	if [ -d ".venv" ]; then
+		source "$(pwd)/.venv/bin/activate"
+	else
+		echo "No .venv directory found in the current directory."
+	fi
+}
