@@ -12,9 +12,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 local colorschemes = {
 	"terafox",
 	-- "rose-pine",
-	"rose-pine-moon",
+	-- "rose-pine-moon",
 	"nightfox",
-	"retrobox",
+	"duskfox",
+	-- "retrobox",
 	-- "onenord",
 }
 

@@ -10,6 +10,10 @@ source ~/.git-prompt.sh
 
 export EDITOR=nvim
 
+# See the following if terminfo is not installed:
+# https://github.com/alacritty/alacritty/blob/master/INSTALL.md#terminfo
+export TERM=alacritty
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -95,3 +99,4 @@ activate() {
 		echo "No .venv directory found in the current directory."
 	fi
 }
+
