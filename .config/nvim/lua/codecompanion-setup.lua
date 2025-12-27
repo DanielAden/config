@@ -2,12 +2,6 @@ vim.keymap.set({ "n", "v" }, "<leader>ac", ":CodeCompanionChat Toggle<CR>", { de
 
 vim.keymap.set(
 	{ "n", "v" },
-	"<C-a>",
-	":CodeCompanionActions<CR>",
-	{ noremap = true, silent = true, desc = "Code Companion Actions" }
-)
-vim.keymap.set(
-	{ "n", "v" },
 	"<leader>aa",
 	":CodeCompanionActions<CR>",
 	{ noremap = true, silent = true, desc = "Code Companion Actions" }
