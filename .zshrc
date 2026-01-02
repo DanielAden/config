@@ -6,8 +6,6 @@ if [ -f ~/.personalrc ]; then
     . ~/.personalrc;
 fi
 
-source ~/.git-prompt.sh
-
 export EDITOR=nvim
 
 # See the following if terminfo is not installed:
@@ -27,13 +25,23 @@ PATH="$HOME/go/bin:$PATH"
 # Add lunarvim etc. to path
 PATH="$HOME/.local/bin:$PATH"
 
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-# RPROMPT='${vcs_info_msg_0_}'
-PROMPT='%~ ${vcs_info_msg_0_}'$'\n''$ '
-zstyle ':vcs_info:git:*' formats '(%b)'
+
+# # OLD Prompt, remove eventually if you like the new prompt
+# autoload -Uz vcs_info
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# setopt prompt_subst
+# # RPROMPT='${vcs_info_msg_0_}'
+# PROMPT='%~ ${vcs_info_msg_0_}'$'\n''$ '
+# zstyle ':vcs_info:git:*' formats '(%b)'
+# ##########################################################
+
+
+# # New Prompt 
+source $HOME/Source/zsh-git-prompt/zshrc.sh
+PROMPT='%~ $(git_super_status)'$'\n''$ ' 
+# PROMPT='%B%m%~%b$(git_super_status) %# '
+
 
 	
 # Vim CLI
@@ -87,7 +95,8 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 alias ncon="cd ~/.config/nvim; nvim"
 alias path="echo $PATH | tr : '\n'"
 
-. "${HOME}/.deno/env"
+# TODO investigate why this was added?
+# . "${HOME}/.deno/env"
 
 # FNs
 

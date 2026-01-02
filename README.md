@@ -31,3 +31,19 @@ mkdir ~/.local/share/fonts
 cd ~/.local/share/fonts
 cp ~/Library/Fonts/HackNerdFont-* ./
 ```
+
+
+# Packages
+
+## Brew
+See ./brewpackages.txt, run with: 
+
+```sh
+brew install $(cat packages.txt)
+```
+
+## Other
+### zsh-git-prompt
+https://github.com/zsh-git-prompt/zsh-git-prompt.git
+git clone into `~/Source`
+

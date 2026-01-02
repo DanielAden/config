@@ -1,0 +1,4 @@
+neovim
+deno
+git-delta
+ripgrep
