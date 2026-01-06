@@ -1,3 +1,6 @@
+-- NVIM CONFIG TODO
+-- * Investigate this as a go plugin replacement: https://github.com/ray-x/go.nvim
+
 vim.cmd([[
   set runtimepath^=~/.vim runtimepath+=~/.vim/after
   let &packpath = &runtimepath
