@@ -7,6 +7,7 @@ local ignore_glob_pattern = {
 	"!package-lock.json",
 	"!**/test/**",
 	"!**/*UnitTests*/**",
+	"!*.stories.*",
 }
 
 return { -- Fuzzy Finder (files, lsp, etc)
