@@ -60,3 +60,8 @@ vim.keymap.set("n", "<leader>ca", function()
 	vim.g.auto_format_enabled = not vim.g.auto_format_enabled
 	vim.print("Autoformat " .. tostring(vim.g.auto_format_enabled))
 end, { desc = "[A]utoformat Toggle" })
+
+-- map file names to clipboard
+vim.keymap.set("n", "<leader>yf", ":let @+=expand('%:t')<CR>", { desc = "[Y]ank File [F]ile Name" })
+vim.keymap.set("n", "<leader>yn", ":let @+=expand('%:t')<CR>", { desc = "[Y]ank File File [N]ame" })
+vim.keymap.set("n", "<leader>yp", ":let @+=expand('%:p')<CR>", { desc = "[Y]ank File [P]ath" })
