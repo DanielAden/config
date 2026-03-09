@@ -10,6 +10,42 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+		adapters = {
+			acp = {
+				claude_code = function()
+					return require("codecompanion.adapters").extend("claude_code", {
+						env = {
+							CLAUDE_CODE_OAUTH_TOKEN = os.getenv("CLAUDE_CODE_OAUTH_TOKEN"),
+						},
+					})
+				end,
+			},
+			http = {
+				anthropic = function()
+					return require("codecompanion.adapters").extend("anthropic", {
+						env = {
+							api_key = os.getenv("CLAUDE_CODE_OAUTH_TOKEN"),
+						},
+					})
+				end,
+			},
+		},
+		config = function()
+			require("codecompanion").setup({
+				-- https://codecompanion.olimorris.dev/configuration/adapters-http#changing-the-default-adapter
+				interactions = {
+					chat = {
+						adapter = "claude_code",
+					},
+					inline = {
+						adapter = "anthropic",
+					},
+					cmd = {
+						adapter = "claude_code",
+					},
+				},
+			})
+		end,
 	},
 	{
 		"echasnovski/mini.diff",
