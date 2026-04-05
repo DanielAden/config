@@ -1,5 +1,7 @@
 -- NVIM CONFIG TODO
+-- * Default markdown files to be unfolded
 -- * Investigate this as a go plugin replacement: https://github.com/ray-x/go.nvim
+-- * Investigate grug-far for file replacement
 
 vim.cmd([[
   set runtimepath^=~/.vim runtimepath+=~/.vim/after

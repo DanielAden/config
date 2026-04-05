@@ -44,6 +44,9 @@
 	follow = "!sh -c 'git log --topo-order -u -L $2,${3:-$2}:"$1"'" -
 
 	where = "config --list --show-origin"
+
+	# commit changes to current branch, commit and push, then soft reset
+	wipc = "!sh -c 'git add -A && git commit -m \"WIP commit\" && git push --force-with-lease origin HEAD && git reset --soft HEAD~1'"
 [core]
 	autocrlf = false
 	pager = delta
