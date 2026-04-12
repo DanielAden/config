@@ -69,3 +69,6 @@ xnoremap <leader>p "_dP
 
 " remove search highlighting
 nnoremap <leader>h :nohlsearch<CR>
+
+" default folds to being open
+set foldlevelstart=99
