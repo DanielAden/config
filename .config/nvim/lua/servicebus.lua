@@ -15,6 +15,7 @@ function ReplaceServiceBusBodyParams(body, tenant)
 		contractNumber = tenant["contractNumber"],
 		tenantSchema = "T" .. tenant["contractNumber"],
 		tenantId = tenant["tenantId"],
+		timeStamp = os.date("!%Y-%m-%dT%H:%M:%SZ"),
 	}
 	for key, value in pairs(replacements) do
 		local placeholder = "{{" .. key .. "}}"

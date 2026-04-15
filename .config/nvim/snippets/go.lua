@@ -8,15 +8,18 @@ local t = ls.text_node
 -- https://github.com/ray-x/go.nvim/blob/41a18f0c05534c375bafec7ed05cdb409c4abcc6/lua/go/snips.lua
 -- https://github.com/ray-x/go.nvim/blob/41a18f0c05534c375bafec7ed05cdb409c4abcc6/lua/snips/go.lua
 --
+-- I'm guessing after the update to nvim 12 a lot of this probably isn't going to work, need to investigate the
+-- nvim-treesitter plugin more, or just consider re-writing a lot of this if I ever get back into heavy go development
+--
 local fmt = require("luasnip.extras.fmt").fmt
 local ts_locals
-local ok, ts_utils = pcall(require, "nvim-treesitter.ts_utils")
-if not ok then
-	ts_utils = require("guihua.ts_obsolete.ts_utils")
-	ts_locals = require("guihua.ts_obsolete.locals")
-else
-	ts_locals = require("nvim-treesitter.locals")
-end
+-- local ok, ts_utils = pcall(require, "nvim-treesitter.ts_utils")
+-- if not ok then
+-- 	ts_utils = require("guihua.ts_obsolete.ts_utils")
+-- 	ts_locals = require("guihua.ts_obsolete.locals")
+-- else
+-- 	ts_locals = require("nvim-treesitter.locals")
+-- end
 local rep = require("luasnip.extras").rep
 local ai = require("luasnip.nodes.absolute_indexer")
 
@@ -153,7 +156,7 @@ end
 
 local function return_value_nodes(info)
 	set_query()
-	local cursor_node = ts_utils.get_node_at_cursor()
+	local cursor_node = vim.treesitter.get_node_at_cursor()
 	local scope_tree = ts_locals.get_scope_tree(cursor_node, 0)
 
 	local function_node
@@ -183,15 +186,7 @@ local function return_value_nodes(info)
 end
 
 function snips.in_func()
-	-- local ok, ts_utils = pcall(require, 'nvim-treesitter.ts_utils')
-	if not ok then
-		ok, ts_utils = pcall(require, "guihua.ts_obsolete.ts_utils")
-		if not ok then
-			warn("ts_utils not found")
-			return false
-		end
-	end
-	local current_node = ts_utils.get_node_at_cursor()
+	local current_node = vim.treesitter.get_node_at_cursor()
 	if not current_node then
 		return false
 	end

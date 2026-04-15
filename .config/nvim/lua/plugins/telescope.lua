@@ -13,7 +13,7 @@ local ignore_glob_pattern = {
 return { -- Fuzzy Finder (files, lsp, etc)
 	"nvim-telescope/telescope.nvim",
 	event = "VimEnter",
-	branch = "0.1.x",
+	branch = "master",
 	dependencies = {
 		"nvim-telescope/telescope-live-grep-args.nvim",
 		"nvim-lua/plenary.nvim",
