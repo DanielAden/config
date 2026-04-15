@@ -4,7 +4,7 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
-local filePath = "/Users/dat3631/Notes/tenants.md"
+local filePath = "/Users/daden/Notes/tenants.md"
 local seperator = "================================================================================="
 
 function split(inputstr, sep)

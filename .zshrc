@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/daden/.zsh/completions:"* ]]; then export FPATH="/Users/daden/.zsh/completions:$FPATH"; fi
 if [ -f ~/.workrc ]; then 
     . ~/.workrc;
 fi
@@ -110,3 +112,7 @@ activate() {
 }
 
 
+. "/Users/daden/.deno/env"
+# Initialize zsh completions (added by deno install script)
+autoload -Uz compinit
+compinit

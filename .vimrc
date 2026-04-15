@@ -10,7 +10,7 @@ filetype indent on
 set nu
 set relativenumber
 
-set textwidth=120
+" set textwidth=120
 set laststatus=2
 
 " set list

@@ -54,7 +54,7 @@ local servers = {
 		},
 	},
 	-- rust_analyzer = {},
-	tsserver = {
+	ts_ls = {
 		init_options = {
 			preferences = {
 				importModuleSpecifierPreference = "relative",
@@ -160,9 +160,9 @@ return { -- LSP Configuration & Plugins
 		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
 		{ "j-hui/fidget.nvim", opts = {} },
 
-		-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
+		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
 		-- used for completion, annotations and signatures of Neovim apis
-		{ "folke/neodev.nvim", opts = {} },
+		{ "folke/lazydev.nvim", opts = {} },
 	},
 	config = function()
 		--  This function gets run when an LSP attaches to a particular buffer.
@@ -258,7 +258,7 @@ return { -- LSP Configuration & Plugins
 					end, "[T]oggle Inlay [H]ints")
 				end
 
-				if client and client.name == "tsserver" then
+				if client and client.name == "ts_ls" then
 					vim.api.nvim_create_user_command(
 						"OrganizeImports",
 						organize_imports_ts,
@@ -300,7 +300,7 @@ return { -- LSP Configuration & Plugins
 					local server = servers[server_name] or {}
 					-- This handles overriding only values explicitly passed
 					-- by the server configuration above. Useful when disabling
-					-- certain features of an LSP (for example, turning off formatting for tsserver)
+					-- certain features of an LSP (for example, turning off formatting for ts_ls)
 					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 					require("lspconfig")[server_name].setup(server)
 				end,
