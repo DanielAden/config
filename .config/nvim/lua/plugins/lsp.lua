@@ -25,14 +25,6 @@ local function organize_imports_ts()
 	vim.lsp.buf.execute_command(params)
 end
 
-local tsjsFormatOnSave = function()
-	if not vim.g.auto_format_enabled then
-		return
-	end
-	vim.cmd("EslintFixAll")
-	vim.print("EslintFixAll")
-end
-
 --  Add any additional override configuration in the following tables. Available keys are:
 --  - cmd (table): Override the default command used to start the server
 --  - filetypes (table): Override the default list of associated filetypes for the server
@@ -111,10 +103,9 @@ local servers = {
 	},
 	eslint = {
 		on_attach = function(client, bufnr)
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = tsjsFormatOnSave,
-			})
+			-- vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 	buffer = bufnr,
+			-- })
 		end,
 		settings = {
 			codeActionOnSave = {
@@ -296,20 +287,9 @@ return { -- LSP Configuration & Plugins
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-		require("mason-lspconfig").setup({
-			handlers = {
-				function(server_name)
-					local server = servers[server_name] or {}
-					-- This handles overriding only values explicitly passed
-					-- by the server configuration above. Useful when disabling
-					-- certain features of an LSP (for example, turning off formatting for ts_ls)
-					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-					require("lspconfig")[server_name].setup(server)
-				end,
-			},
-		})
-
-		-- TODO need to refactor all my config to use this I guess?
-		vim.lsp.config("basedpyright", servers["basedpyright"])
+		for name, server in pairs(servers) do
+			vim.lsp.config(name, server)
+			vim.lsp.enable(name)
+		end
 	end,
 }
